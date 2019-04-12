@@ -1,0 +1,22 @@
+.markdownInput {
+  height: 100%;
+  textarea {
+    opacity: 0;
+  }
+  :global(.CodeMirror) {
+    :global(.CodeMirror-selected) {
+      background: rgb(181, 213, 255);
+    }
+    :global(.CodeMirror-linenumber) {
+      font-family: sans-serif;
+    }
+    .markedText {
+      background: yellow;
+    }
+    height: 100%;
+  }
+  .markdownTextArea {
+    height: 100%;
+    resize: none;
+  }
+}

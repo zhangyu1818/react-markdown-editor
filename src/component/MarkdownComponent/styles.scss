@@ -1,0 +1,132 @@
+.markdown {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .title {
+    height: 60px;
+    background: #fff;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 0 20px;
+    display: flex;
+    .titleName {
+      align-items: center;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      font-weight: bold;
+    }
+  }
+  .toolbar {
+    background: #fff;
+    min-height: 46px;
+    padding: 11px 12px;
+    .actionIcon {
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      border: none;
+      font-style: normal;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 300ms, transform 100ms;
+      &:hover {
+        color: #40a9ff;
+      }
+      &:active {
+        transform: scale(1.15);
+      }
+    }
+  }
+  .toolbarToggle {
+    border-bottom: 1px solid #e8e8e8;
+    height: 12px;
+    transition: background-color 300ms;
+    &:hover {
+      background: rgba(166, 206, 252, 0.4);
+    }
+  }
+  .content {
+    position: relative;
+    flex: 1;
+    background: #fff;
+    .writeContainer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+      .waitingIcon {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        color: #1890ff;
+      }
+      .inputAreaWrapper {
+        float: left;
+        width: 50%;
+        height: 100%;
+        border: 1px solid #d9d9d9;
+        border-radius: 4px 0 0 4px;
+        overflow: hidden;
+      }
+      .outputAreaWrapper {
+        float: left;
+        width: 50%;
+        height: 100%;
+        padding: 20px;
+        border-radius: 0 4px 4px 0;
+        background: #fff;
+        border: 1px solid #d9d9d9;
+        border-left: none;
+        overflow: scroll;
+      }
+    }
+  }
+}
+.themeListWrapper {
+  min-width: 120px;
+  :global(.ant-popover-inner-content) {
+    padding: 0;
+  }
+  .themeType {
+    color: rgba(0, 0, 0, 0.45);
+    font-weight: normal;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 20px;
+  }
+  .themeList {
+    margin-bottom: 0;
+    width: 240px;
+    overflow: hidden;
+    border-bottom: 1px solid #e8e8e8;
+    dd {
+      display: inline-block;
+      width: 120px;
+      height: 32px;
+      line-height: 22px;
+      padding: 5px 12px 5px 20px;
+      margin: 0;
+      cursor: pointer;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      &:hover {
+        background: #e6f7ff;
+      }
+      &.active {
+        background: #fafafa;
+      }
+    }
+  }
+}
