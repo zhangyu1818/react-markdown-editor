@@ -14,15 +14,7 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-react", "@babel/preset-env"],
-            plugins: [
-              "@babel/plugin-syntax-dynamic-import",
-              [
-                "import",
-                { libraryName: "antd", libraryDirectory: "es", style: "css" },
-                "ant"
-              ]
-            ]
+            presets: ["@babel/preset-react", "@babel/preset-env"]
           }
         }
       },
@@ -39,7 +31,7 @@ module.exports = {
             loader: "css-loader",
             options: {
               modules: true,
-              localIdentName: "[name]__[local]__[hash:base64:5]"
+              localIdentName: "md-editor__[local]__[hash:base64:5]"
             }
           },
           "postcss-loader",

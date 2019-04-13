@@ -2,12 +2,15 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  * {
+    box-sizing: border-box;
+  }
   .title {
     height: 60px;
     background: #fff;
     border-top: 1px solid #d9d9d9;
     border-bottom: 1px solid #d9d9d9;
-    padding: 0 20px;
+    padding: 4px 20px;
     display: flex;
     .titleName {
       align-items: center;
@@ -21,7 +24,12 @@
     background: #fff;
     min-height: 46px;
     padding: 11px 12px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+      'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+      'Segoe UI Emoji', 'Segoe UI Symbol';
     .actionIcon {
+      color: rgba(0, 0, 0, 0.65);
+      user-select: none;
       width: 24px;
       height: 24px;
       padding: 0;
@@ -31,12 +39,15 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      transform-origin: center;
       transition: color 300ms, transform 100ms;
+      font-size: 14px;
+      border-radius: 50%;
       &:hover {
         color: #40a9ff;
       }
       &:active {
-        transform: scale(1.15);
+        transform: scale(1.2);
       }
     }
   }
@@ -95,9 +106,7 @@
 }
 .themeListWrapper {
   min-width: 120px;
-  :global(.ant-popover-inner-content) {
-    padding: 0;
-  }
+  user-select: none;
   .themeType {
     color: rgba(0, 0, 0, 0.45);
     font-weight: normal;
@@ -109,9 +118,12 @@
     margin-bottom: 0;
     width: 240px;
     overflow: hidden;
-    border-bottom: 1px solid #e8e8e8;
+    & + .themeType {
+      margin-top: 10px;
+      border-top: 1px solid #e8e8e8;
+    }
     dd {
-      display: inline-block;
+      float: left;
       width: 120px;
       height: 32px;
       line-height: 22px;

@@ -4,11 +4,15 @@
     opacity: 0;
   }
   :global(.CodeMirror) {
+    * {
+      box-sizing: content-box;
+    }
     :global(.CodeMirror-selected) {
       background: rgb(181, 213, 255);
     }
     :global(.CodeMirror-linenumber) {
       font-family: sans-serif;
+      font-size: 14px;
     }
     .markedText {
       background: yellow;

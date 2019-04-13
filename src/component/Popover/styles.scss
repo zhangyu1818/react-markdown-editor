@@ -1,0 +1,63 @@
+.popover {
+  position: fixed;
+  top: -100%;
+  left: -100%;
+  display: none;
+  z-index: 1030;
+  transform: translateX(-50%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 14px;
+  * {
+    box-sizing: border-box;
+  }
+  .popoverContent {
+    padding-top: 10px;
+    transform-origin: 50% -4px;
+    color: rgba(0, 0, 0, 0.65);
+    .popoverArrow {
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      top: 6px;
+      border-top-color: #fff;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      border-left-color: #fff;
+      box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.06);
+      position: absolute;
+      display: block;
+      width: 8.48528137px;
+      height: 8.48528137px;
+      background: transparent;
+      border-width: 4.24264069px;
+      border-style: solid;
+    }
+    .popoverInner {
+      background: #fff;
+      transform-origin: 50% -4px;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+:global(.popover-enter) {
+  transform: scale(0.2);
+  opacity: 0;
+}
+:global(.popover-enter-active) {
+  transform: scale(1);
+  opacity: 1;
+  transition: opacity 200ms, transform 200ms;
+  transition-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+}
+:global(.popover-exit) {
+  opacity: 1;
+  transform: scale(1);
+}
+:global(.popover-exit-active) {
+  transform: scale(0.2);
+  opacity: 0;
+  transition: opacity 200ms, transform 200ms;
+  transition-timing-function: cubic-bezier(0.78, 0.14, 0.15, 0.86);
+}

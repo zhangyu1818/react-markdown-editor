@@ -1,40 +1,35 @@
-import React, {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useRef
-} from "react";
-import codemirror from "codemirror";
-import debounce from "lodash/debounce";
-import styles from "./styles.scss";
-import "codemirror/lib/codemirror.css";
-import "codemirror/mode/markdown/markdown";
-import "codemirror/addon/edit/matchbrackets";
-import "codemirror/addon/edit/matchtags";
-import "codemirror/addon/edit/closebrackets";
-import "codemirror/addon/edit/closetag";
-import "codemirror/addon/edit/continuelist";
-import "codemirror/addon/selection/mark-selection";
+import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
+import codemirror from 'codemirror';
+import debounce from 'lodash/debounce';
+import styles from './styles.scss';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/mode/markdown/markdown';
+import 'codemirror/addon/edit/matchbrackets';
+import 'codemirror/addon/edit/matchtags';
+import 'codemirror/addon/edit/closebrackets';
+import 'codemirror/addon/edit/closetag';
+import 'codemirror/addon/edit/continuelist';
+import 'codemirror/addon/selection/mark-selection';
 
-import "codemirror/theme/bespin.css";
-import "codemirror/theme/cobalt.css";
-import "codemirror/theme/darcula.css";
-import "codemirror/theme/duotone-dark.css";
-import "codemirror/theme/eclipse.css";
-import "codemirror/theme/icecoder.css";
-import "codemirror/theme/idea.css";
-import "codemirror/theme/mbo.css";
-import "codemirror/theme/mdn-like.css";
-import "codemirror/theme/midnight.css";
-import "codemirror/theme/monokai.css";
-import "codemirror/theme/nord.css";
-import "codemirror/theme/paraiso-dark.css";
-import "codemirror/theme/paraiso-light.css";
-import "codemirror/theme/tomorrow-night-eighties.css";
-import "codemirror/theme/twilight.css";
+import 'codemirror/theme/bespin.css';
+import 'codemirror/theme/cobalt.css';
+import 'codemirror/theme/darcula.css';
+import 'codemirror/theme/duotone-dark.css';
+import 'codemirror/theme/eclipse.css';
+import 'codemirror/theme/icecoder.css';
+import 'codemirror/theme/idea.css';
+import 'codemirror/theme/mbo.css';
+import 'codemirror/theme/mdn-like.css';
+import 'codemirror/theme/midnight.css';
+import 'codemirror/theme/monokai.css';
+import 'codemirror/theme/nord.css';
+import 'codemirror/theme/paraiso-dark.css';
+import 'codemirror/theme/paraiso-light.css';
+import 'codemirror/theme/tomorrow-night-eighties.css';
+import 'codemirror/theme/twilight.css';
 
-import "codemirror/addon/scroll/simplescrollbars";
-import "codemirror/addon/scroll/simplescrollbars.css";
+import 'codemirror/addon/scroll/simplescrollbars';
+import 'codemirror/addon/scroll/simplescrollbars.css';
 
 const getStr = {
   bold: str => `**${str}**`,
@@ -53,7 +48,7 @@ const getStr = {
   image: str => `![${str}]()`,
   unCompleted: str => `- [ ] ${str}`,
   completed: str => `- [x] ${str}`,
-  code: str => `\n\`\`\`\n${str}\n\`\`\``
+  code: str => `\n\`\`\`\n${str}\n\`\`\``,
 };
 const getEmptyOffset = {
   bold: 2,
@@ -61,48 +56,35 @@ const getEmptyOffset = {
   strikethrough: 2,
   underline: 2,
   link: 1,
-  image: 2
+  image: 2,
 };
 
 const defaultActionTrans = cm => action => {
   if (cm.somethingSelected()) {
     const selections = cm.getSelections();
-    const newSelections = selections.map(str =>
-      str !== "" ? getStr[action](str) : str
-    );
+    const newSelections = selections.map(str => (str !== '' ? getStr[action](str) : str));
     cm.replaceSelections(newSelections);
   } else {
     const pos = cm.getCursor();
-    cm.replaceRange(getStr[action](""), pos, pos);
+    cm.replaceRange(getStr[action](''), pos, pos);
     const offset = getEmptyOffset[action];
     if (offset) cm.setCursor({ ...pos, ch: pos.ch + offset });
   }
-  if (action === "code") {
-    cm.execCommand("goLineUp");
-    cm.execCommand("goLineEnd");
+  if (action === 'code') {
+    cm.execCommand('goLineUp');
+    cm.execCommand('goLineEnd');
   }
 };
 
 const MarkdownInput = forwardRef(
-  (
-    {
-      onChange,
-      onScroll,
-      scrollPercent,
-      className,
-      style,
-      debounceTime,
-      theme
-    },
-    ref
-  ) => {
+  ({ onChange, onScroll, scrollPercent, className, style, debounceTime, theme }, ref) => {
     const textAreaRef = useRef();
     const editor = useRef();
     const mouseIn = useRef(false);
 
     useEffect(() => {
       editor.current = codemirror.fromTextArea(textAreaRef.current, {
-        mode: "text/x-markdown",
+        mode: 'text/x-markdown',
         lineNumbers: true,
         highlightFormatting: true,
         matchBrackets: true,
@@ -111,20 +93,20 @@ const MarkdownInput = forwardRef(
         autoCloseTags: true,
         autofocus: true,
         extraKeys: {
-          Enter: "newlineAndIndentContinueMarkdownList",
-          "Ctrl-B": cm => defaultActionTrans(cm)("bold"),
-          "Ctrl-H": cm => defaultActionTrans(cm)("heading2"),
-          "Ctrl-K": cm => defaultActionTrans(cm)("link"),
-          "Shift-Ctrl-C": cm => defaultActionTrans(cm)("code")
+          Enter: 'newlineAndIndentContinueMarkdownList',
+          'Ctrl-B': cm => defaultActionTrans(cm)('bold'),
+          'Ctrl-H': cm => defaultActionTrans(cm)('heading2'),
+          'Ctrl-K': cm => defaultActionTrans(cm)('link'),
+          'Shift-Ctrl-C': cm => defaultActionTrans(cm)('code'),
         },
-        scrollbarStyle: "simple",
-        lineWrapping: true
+        scrollbarStyle: 'simple',
+        lineWrapping: true,
       });
       editor.current.on(
-        "change",
+        'change',
         debounce(() => onChange(editor.current.getValue()), debounceTime)
       );
-      editor.current.on("scroll", () => {
+      editor.current.on('scroll', () => {
         if (!mouseIn.current) return;
         const positionInfo = editor.current.getScrollInfo();
         const height = positionInfo.height - positionInfo.clientHeight;
@@ -138,27 +120,27 @@ const MarkdownInput = forwardRef(
         action: action => {
           editor.current.focus();
           switch (action) {
-            case "undo":
+            case 'undo':
               editor.current.undo();
               return;
-            case "redo":
+            case 'redo':
               editor.current.redo();
               return;
-            case "horizontalRule": {
-              editor.current.execCommand("goLineEnd");
+            case 'horizontalRule': {
+              editor.current.execCommand('goLineEnd');
               if (editor.current.getLine(editor.current.getCursor().line))
-                editor.current.execCommand("newlineAndIndent");
-              editor.current.execCommand("newlineAndIndent");
+                editor.current.execCommand('newlineAndIndent');
+              editor.current.execCommand('newlineAndIndent');
               const pos = editor.current.getCursor();
-              editor.current.replaceRange("---", pos, pos);
-              editor.current.execCommand("newlineAndIndent");
+              editor.current.replaceRange('---', pos, pos);
+              editor.current.execCommand('newlineAndIndent');
               return;
             }
-            case "table": {
-              editor.current.execCommand("goLineEnd");
+            case 'table': {
+              editor.current.execCommand('goLineEnd');
               if (editor.current.getLine(editor.current.getCursor().line))
-                editor.current.execCommand("newlineAndIndent");
-              editor.current.execCommand("newlineAndIndent");
+                editor.current.execCommand('newlineAndIndent');
+              editor.current.execCommand('newlineAndIndent');
               const pos = editor.current.getCursor();
               editor.current.replaceRange(
                 `header 1 | header 2
@@ -168,27 +150,26 @@ row 2 col 1 | row 2 col 2`,
                 pos,
                 pos
               );
-              editor.current.execCommand("newlineAndIndent");
+              editor.current.execCommand('newlineAndIndent');
               return;
             }
-            case "quote": {
-              editor.current.execCommand("goLineStart");
+            case 'quote': {
+              editor.current.execCommand('goLineStart');
               const pos = editor.current.getCursor();
-              editor.current.replaceRange("> ", pos, pos);
-              editor.current.execCommand("goLineEnd");
+              editor.current.replaceRange('> ', pos, pos);
+              editor.current.execCommand('goLineEnd');
               return;
             }
-            case "highlight": {
+            case 'highlight': {
               editor.current
                 .listSelections()
                 .map(({ anchor, head }) =>
-                  [
-                    { line: anchor.line, ch: anchor.ch },
-                    { line: head.line, ch: head.ch }
-                  ].sort((a, b) => {
-                    if (a.line !== b.line) return a.line - b.line;
-                    return a.ch - b.ch;
-                  })
+                  [{ line: anchor.line, ch: anchor.ch }, { line: head.line, ch: head.ch }].sort(
+                    (a, b) => {
+                      if (a.line !== b.line) return a.line - b.line;
+                      return a.ch - b.ch;
+                    }
+                  )
                 )
                 .forEach(selected => {
                   const [start, end] = selected;
@@ -208,7 +189,7 @@ row 2 col 1 | row 2 col 2`,
                   if (isExist) return;
                   editor.current.markText(start, end, {
                     className: styles.markedText,
-                    addToHistory: true
+                    addToHistory: true,
                   });
                 });
               return;
@@ -218,25 +199,19 @@ row 2 col 1 | row 2 col 2`,
             }
           }
         },
-        getValue: () => editor.current.getValue()
+        getValue: () => editor.current.getValue(),
       }),
       []
     );
-    useEffect(
-      () => {
-        if (mouseIn.current) return;
-        const positionInfo = editor.current.getScrollInfo();
-        const height = positionInfo.height - positionInfo.clientHeight;
-        editor.current.scrollTo(0, height * scrollPercent);
-      },
-      [scrollPercent]
-    );
-    useEffect(
-      () => {
-        editor.current.setOption("theme", theme);
-      },
-      [theme]
-    );
+    useEffect(() => {
+      if (mouseIn.current) return;
+      const positionInfo = editor.current.getScrollInfo();
+      const height = positionInfo.height - positionInfo.clientHeight;
+      editor.current.scrollTo(0, height * scrollPercent);
+    }, [scrollPercent]);
+    useEffect(() => {
+      editor.current.setOption('theme', theme);
+    }, [theme]);
     return (
       <div className={className} style={style}>
         <div
