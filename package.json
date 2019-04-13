@@ -1,11 +1,15 @@
 {
-  "name": "react-markdown-editor",
+  "name": "react-markdown-mirror",
   "version": "1.0.0",
   "description": "React Markdown Editor,based on CodeMirror,Marked and Prism",
   "main": "dist/index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhangyu1818/react-markdown-editor.git"
   },
   "sideEffects": [
     "*.css"
