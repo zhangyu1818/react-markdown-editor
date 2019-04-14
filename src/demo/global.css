@@ -3,5 +3,5 @@ body,
 #root {
   margin: 0;
   background: #f0f2f5;
-  height: 100%;
+  height: calc(100vh - 24px);
 }

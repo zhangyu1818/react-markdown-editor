@@ -123,7 +123,7 @@ const Markdown = forwardRef(
         </Fragment>
       ));
     return (
-      <div className={styles.markdown}>
+      <div className={classNames(styles.markdown, containerClassName)}>
         {title ? (
           <div className={styles.title}>
             <input
@@ -301,7 +301,7 @@ const Markdown = forwardRef(
           </>
         ) : null}
         <div className={styles.content}>
-          <div className={classNames(styles.writeContainer, containerClassName)}>
+          <div className={styles.writeContainer}>
             <MarkdownInput
               style={{ width: !showView ? '100%' : null }}
               ref={inputAreaRef}
