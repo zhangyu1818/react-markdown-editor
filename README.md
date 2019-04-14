@@ -1,6 +1,8 @@
 # react-markdown-editor
 A React.js *markdown editor* component, With live preview and highlighting,You can type some markdown on the left and see html in the right.
 
+[Demo](http://sbzy.me/markdown)
+
 ## Install
 `npm install --save react-markdown-mirror`
 
