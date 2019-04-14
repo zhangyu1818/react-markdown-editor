@@ -40,7 +40,7 @@ ReactDOM.render(<Markdown />,document.getElementById('root'));
       <td>set title default value and max length</td>
     </tr>
      <tr>
-      <td>toobar</td>
+      <td>toolbar</td>
       <td>Boolean</td>
       <td>true or false,default true</td>
       <td>show or hide</td>
