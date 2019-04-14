@@ -47,6 +47,10 @@ const Popover = ({ content, className, children }) => {
       domNode.current.addEventListener('click', onClickDom);
       window.addEventListener('click', onClickOther);
     }
+    return () => {
+      domNode.current.removeEventListener('click', onClickDom);
+      window.removeEventListener('click', onClickOther);
+    };
   }, []);
   useEffect(() => {
     showStatus.current = show;
