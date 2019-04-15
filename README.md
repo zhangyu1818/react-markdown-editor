@@ -1,5 +1,5 @@
 # react-markdown-editor
-A React.js *markdown editor* component, With live preview and highlighting,You can type some markdown on the left and see html in the right.
+A convenient React.js *markdown editor* component,Type Markdown on the left and you can preview in real-time on the right panel.
 
 [Demo](http://sbzy.me/markdown)
 
@@ -46,6 +46,12 @@ ReactDOM.render(<Markdown />,document.getElementById('root'));
       <td>show or hide</td>
     </tr>
     <tr>
+    <td>defaultValue</td>
+    <td>String</td>
+    <td>string</td>
+    <td>markdown string value</td>
+    </tr>
+    <tr>
     <td>onChange</td>
     <td>Function</td>
     <td>value=>{}</td>
@@ -78,7 +84,7 @@ ReactDOM.render(<Markdown />,document.getElementById('root'));
   </tbody>
 </table>
 
-### How to get value
+### Get value
 
 1.use onChange prop,you can do something on this callback
 ``` javascript
@@ -92,6 +98,20 @@ const App = () => {
     const value = markdown.current.getValue();
     console.log(value);
   });
+  return <Markdown ref={markdown} />;
+};
+```
+
+### Set value
+
+also use ref
+``` javascript
+const App = () => {
+  const markdown = useRef();
+  useEffect(() => {
+    const defaultValue = "# This is default value";
+    markdown.current.setValue(defaultValue)l
+  },[]);
   return <Markdown ref={markdown} />;
 };
 ```

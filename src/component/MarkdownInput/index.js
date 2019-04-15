@@ -50,6 +50,7 @@ const getStr = {
   completed: str => `- [x] ${str}`,
   code: str => `\n\`\`\`\n${str}\n\`\`\``,
   highlight: str => `==${str}==`,
+  math: str => `\n\`\`\`katex\n${str}\n\`\`\``,
 };
 const getEmptyOffset = {
   bold: 2,
@@ -72,14 +73,17 @@ const defaultActionTrans = cm => action => {
     const offset = getEmptyOffset[action];
     if (offset) cm.setCursor({ ...pos, ch: pos.ch + offset });
   }
-  if (action === 'code') {
+  if (action === 'code' || action === 'math') {
     cm.execCommand('goLineUp');
     cm.execCommand('goLineEnd');
   }
 };
 
 const MarkdownInput = forwardRef(
-  ({ onChange, onScroll, scrollPercent, className, style, debounceTime, theme }, ref) => {
+  (
+    { onChange, onScroll, scrollPercent, className, style, debounceTime, theme, defaultValue },
+    ref
+  ) => {
     const textAreaRef = useRef();
     const editor = useRef();
     const mouseIn = useRef(false);
@@ -168,24 +172,22 @@ row 2 col 1 | row 2 col 2`,
           }
         },
         getValue: () => editor.current.getValue(),
+        setValue: value => editor.current && editor.current.setValue(value),
       }),
       []
     );
-    useEffect(
-      () => {
-        if (mouseIn.current) return;
-        const positionInfo = editor.current.getScrollInfo();
-        const height = positionInfo.height - positionInfo.clientHeight;
-        editor.current.scrollTo(0, height * scrollPercent);
-      },
-      [scrollPercent]
-    );
-    useEffect(
-      () => {
-        editor.current.setOption('theme', theme);
-      },
-      [theme]
-    );
+    useEffect(() => {
+      if (mouseIn.current) return;
+      const positionInfo = editor.current.getScrollInfo();
+      const height = positionInfo.height - positionInfo.clientHeight;
+      editor.current.scrollTo(0, height * scrollPercent);
+    }, [scrollPercent]);
+    useEffect(() => {
+      editor.current.setOption('theme', theme);
+    }, [theme]);
+    useEffect(() => {
+      if (defaultValue) editor.current.setValue(defaultValue);
+    }, [defaultValue]);
     return (
       <div className={className} style={style}>
         <div

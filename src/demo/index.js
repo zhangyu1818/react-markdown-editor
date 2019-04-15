@@ -22,6 +22,7 @@ const App = () => {
         title={showTitle}
         toolbar={showToolbar}
         ref={markdown}
+        defaultValue={'# This is default value'}
         onChange={value => console.log('onChange:=>', value)}
       />
     </>

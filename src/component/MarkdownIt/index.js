@@ -3,13 +3,14 @@ import markdownItMark from 'markdown-it-mark';
 import markdownItTaskList from 'markdown-it-task-list';
 import markdownItLateX from 'markdown-it-latex';
 import markdownItAnchor from 'markdown-it-anchor';
-import markdownContainer from 'markdown-it-container';
+import markdownItContainer from 'markdown-it-container';
+import markdownItEmoji from 'markdown-it-emoji';
+
+import twemoji from 'twemoji';
 import Prism from 'prismjs';
 
-import 'prismjs/themes/prism.css';
 import 'markdown-it-latex/dist/index.css';
 
-console.log(Prism);
 const renderContainer = (tokens, idx) => {
   const { info } = tokens[0];
   return tokens[idx].nesting === 1 ? `<div class="alert ${info}">` : `</div>`;
@@ -18,19 +19,15 @@ const md = new MarkdownIt({
   html: true,
   highlight(code, language) {
     try {
-      return `<pre class="language-${language}"><code class="language-${language}">${Prism.highlight(
-        code,
-        Prism.languages[language],
-        language
-      )}</code></pre>`;
-    } catch (e) {
-      return `<pre class="language-${language}"><code class="language-${language}">${code}</code></pre>`;
-    }
+      setTimeout(() => Prism.highlightAll());
+    } catch (e) {}
+    return `<pre class="language-${language}"><code class="language-${language}">${code}</code></pre>`;
   },
 })
   .use(markdownItMark)
   .use(markdownItTaskList)
   .use(markdownItLateX)
+  .use(markdownItEmoji)
   .use(markdownItAnchor, {
     permalink: true,
     renderPermalink: (slug, opts, state, idx) => {
@@ -58,8 +55,11 @@ const md = new MarkdownIt({
     permalinkClass: 'anchor',
     permalinkBefore: true,
   })
-  .use(markdownContainer, 'success', { render: renderContainer })
-  .use(markdownContainer, 'info', { render: renderContainer })
-  .use(markdownContainer, 'warning', { render: renderContainer })
-  .use(markdownContainer, 'error', { render: renderContainer });
+  .use(markdownItContainer, 'success', { render: renderContainer })
+  .use(markdownItContainer, 'info', { render: renderContainer })
+  .use(markdownItContainer, 'warning', { render: renderContainer })
+  .use(markdownItContainer, 'error', { render: renderContainer });
+
+md.renderer.rules.emoji = (token, idx) => twemoji.parse(token[idx].content);
+
 export default md;

@@ -3,6 +3,7 @@ import React, {
   useRef,
   useState,
   Fragment,
+  useEffect,
   useImperativeHandle,
   forwardRef,
 } from 'react';
@@ -17,7 +18,7 @@ import Popover from '../Popover';
 import markdown from '../MarkdownIt';
 
 import styles from './styles.scss';
-import '@/github-markdown.scss';
+import '@/global.scss';
 
 const light = ['default', 'eclipse', 'idea', 'mdn-like', 'paraiso-light'];
 const dark = [
@@ -55,6 +56,7 @@ const Markdown = forwardRef(
       toolbar = true,
       debounceTime = 500,
       onChange,
+      defaultValue,
     },
     ref
   ) => {
@@ -70,10 +72,14 @@ const Markdown = forwardRef(
       outputAreaRef.current.innerHTML = markdown.render(value);
       onMarkdownValueChange();
     }, []);
+    useEffect(() => {
+      if (defaultValue) setMarkdownValue(defaultValue);
+    }, [defaultValue]);
     useImperativeHandle(
       ref,
       () => ({
         getValue: getMarkdownValue,
+        setValue: setMarkdownValue,
       }),
       []
     );
@@ -83,6 +89,7 @@ const Markdown = forwardRef(
       changeTitleValue(value);
       onMarkdownValueChange();
     };
+    const setMarkdownValue = value => inputAreaRef.current.setValue(value);
     const getMarkdownValue = () => {
       const markdown = inputAreaRef.current.getValue();
       const html = outputAreaRef.current.innerHTML;
@@ -125,7 +132,7 @@ const Markdown = forwardRef(
           <div className={styles.title}>
             <input
               className={styles.titleName}
-              placeholder={title.placeholder || '输入文章标题...'}
+              placeholder={title.placeholder || 'Input title...'}
               value={titleValue}
               onChange={onTitleChange}
               ref={titleInput}
@@ -273,9 +280,9 @@ const Markdown = forwardRef(
               />
               <Icon
                 className={styles.actionIcon}
-                type="formula"
+                type="math"
                 title="Mathematical formula"
-                onClick={onClickToolBar('table')}
+                onClick={onClickToolBar('math')}
               />
               <Icon
                 className={styles.actionIcon}
@@ -314,6 +321,7 @@ const Markdown = forwardRef(
               onScroll={setScroll}
               debounceTime={debounceTime}
               theme={theme}
+              defaultValue={defaultValue}
             />
             <MarkdownOutput
               showView={showView}
