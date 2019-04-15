@@ -49,6 +49,7 @@ const getStr = {
   unCompleted: str => `- [ ] ${str}`,
   completed: str => `- [x] ${str}`,
   code: str => `\n\`\`\`\n${str}\n\`\`\``,
+  highlight: str => `==${str}==`,
 };
 const getEmptyOffset = {
   bold: 2,
@@ -57,6 +58,7 @@ const getEmptyOffset = {
   underline: 2,
   link: 1,
   image: 2,
+  highlight: 2,
 };
 
 const defaultActionTrans = cm => action => {
@@ -160,40 +162,6 @@ row 2 col 1 | row 2 col 2`,
               editor.current.execCommand('goLineEnd');
               return;
             }
-            case 'highlight': {
-              editor.current
-                .listSelections()
-                .map(({ anchor, head }) =>
-                  [{ line: anchor.line, ch: anchor.ch }, { line: head.line, ch: head.ch }].sort(
-                    (a, b) => {
-                      if (a.line !== b.line) return a.line - b.line;
-                      return a.ch - b.ch;
-                    }
-                  )
-                )
-                .forEach(selected => {
-                  const [start, end] = selected;
-                  let isExist = false;
-                  editor.current.findMarks(start, end).forEach(marked => {
-                    const { from, to } = marked.find();
-                    if (
-                      !isExist &&
-                      from.line === start.line &&
-                      from.ch === start.ch &&
-                      to.line === end.line &&
-                      to.ch === end.ch
-                    )
-                      isExist = true;
-                    marked.clear();
-                  });
-                  if (isExist) return;
-                  editor.current.markText(start, end, {
-                    className: styles.markedText,
-                    addToHistory: true,
-                  });
-                });
-              return;
-            }
             default: {
               defaultActionTrans(editor.current)(action);
             }
@@ -203,15 +171,21 @@ row 2 col 1 | row 2 col 2`,
       }),
       []
     );
-    useEffect(() => {
-      if (mouseIn.current) return;
-      const positionInfo = editor.current.getScrollInfo();
-      const height = positionInfo.height - positionInfo.clientHeight;
-      editor.current.scrollTo(0, height * scrollPercent);
-    }, [scrollPercent]);
-    useEffect(() => {
-      editor.current.setOption('theme', theme);
-    }, [theme]);
+    useEffect(
+      () => {
+        if (mouseIn.current) return;
+        const positionInfo = editor.current.getScrollInfo();
+        const height = positionInfo.height - positionInfo.clientHeight;
+        editor.current.scrollTo(0, height * scrollPercent);
+      },
+      [scrollPercent]
+    );
+    useEffect(
+      () => {
+        editor.current.setOption('theme', theme);
+      },
+      [theme]
+    );
     return (
       <div className={className} style={style}>
         <div

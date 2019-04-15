@@ -8,16 +8,16 @@ import React, {
 } from 'react';
 
 import classNames from 'classnames';
-import Marked from 'marked';
-import Prism from 'prismjs';
-import 'prismjs/themes/prism-tomorrow.css';
+
 import Icon from '../Icon';
 import Divider from '../Divider';
 import MarkdownInput from '../MarkdownInput';
 import MarkdownOutput from '../MarkdownOutput';
-import styles from './styles.scss';
-import '@/github-markdown.css';
 import Popover from '../Popover';
+import markdown from '../MarkdownIt';
+
+import styles from './styles.scss';
+import '@/github-markdown.scss';
 
 const light = ['default', 'eclipse', 'idea', 'mdn-like', 'paraiso-light'];
 const dark = [
@@ -67,10 +67,7 @@ const Markdown = forwardRef(
     const outputAreaRef = useRef();
     const inputAreaRef = useRef();
     const onInputChange = useCallback(value => {
-      outputAreaRef.current.innerHTML = Marked(value);
-      outputAreaRef.current.querySelectorAll('pre code').forEach(block => {
-        Prism.highlightElement(block);
-      });
+      outputAreaRef.current.innerHTML = markdown.render(value);
       onMarkdownValueChange();
     }, []);
     useImperativeHandle(
@@ -272,6 +269,12 @@ const Markdown = forwardRef(
                 className={styles.actionIcon}
                 type="table"
                 title="Table"
+                onClick={onClickToolBar('table')}
+              />
+              <Icon
+                className={styles.actionIcon}
+                type="formula"
+                title="Mathematical formula"
                 onClick={onClickToolBar('table')}
               />
               <Icon
