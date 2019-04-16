@@ -810,7 +810,7 @@
     }
   }
   .emoji {
-    &+.emoji{
+    & + .emoji {
       margin-left: 0.4em;
     }
     height: 1em;

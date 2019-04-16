@@ -1,14 +1,13 @@
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
-const path = require("path");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const path = require('path');
 module.exports = {
-  mode: "production",
+  mode: 'production',
   entry: {
-    index: "./src/index.js"
+    index: './src/index.js',
   },
   output: {
-    libraryTarget: "commonjs2"
+    libraryTarget: 'commonjs2',
   },
   module: {
     rules: [
@@ -122,32 +121,32 @@ module.exports = {
       },
     ],
   },
-  devtool: "none",
+  devtool: 'none',
   externals: {
     react: {
-      commonjs: "react",
-      commonjs2: "react",
-      amd: "react",
-      root: "_"
+      commonjs: 'react',
+      commonjs2: 'react',
+      amd: 'react',
+      root: '_',
     },
-    "react-dom": {
-      commonjs: "react-dom",
-      commonjs2: "react-dom",
-      amd: "react-dom",
-      root: "_"
-    }
+    'react-dom': {
+      commonjs: 'react-dom',
+      commonjs2: 'react-dom',
+      amd: 'react-dom',
+      root: '_',
+    },
   },
   optimization: {
     usedExports: true,
   },
   resolve: {
-    extensions: [".js"],
+    extensions: ['.js'],
     alias: {
-      "@": path.resolve(__dirname, "src")
-    }
+      '@': path.resolve(__dirname, 'src'),
+    },
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new BundleAnalyzerPlugin()
-  ]
+    // new BundleAnalyzerPlugin()
+  ],
 };

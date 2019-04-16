@@ -17,17 +17,20 @@ const MarkdownOutput = forwardRef(({ scrollPercent, onScroll, className, showVie
     const percent = markdownBodyRef.current.parentNode.scrollTop / innerHeight;
     if (onScroll) onScroll(percent);
   }, []);
-  useEffect(() => {
-    if (mouseIn.current) return;
-    const computedStyle = getComputedStyle(markdownBodyRef.current.parentNode);
-    const padding =
-      parseInt(computedStyle.paddingTop, 10) + parseInt(computedStyle.paddingBottom, 10);
-    const innerHeight =
-      markdownBodyRef.current.clientHeight -
-      markdownBodyRef.current.parentNode.clientHeight +
-      padding;
-    markdownBodyRef.current.parentNode.scrollTop = innerHeight * scrollPercent;
-  }, [scrollPercent]);
+  useEffect(
+    () => {
+      if (mouseIn.current) return;
+      const computedStyle = getComputedStyle(markdownBodyRef.current.parentNode);
+      const padding =
+        parseInt(computedStyle.paddingTop, 10) + parseInt(computedStyle.paddingBottom, 10);
+      const innerHeight =
+        markdownBodyRef.current.clientHeight -
+        markdownBodyRef.current.parentNode.clientHeight +
+        padding;
+      markdownBodyRef.current.parentNode.scrollTop = innerHeight * scrollPercent;
+    },
+    [scrollPercent]
+  );
   return (
     <div
       style={{ display: !showView ? 'none' : null }}

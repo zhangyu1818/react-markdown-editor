@@ -5,6 +5,8 @@ import markdownItLateX from 'markdown-it-latex';
 import markdownItAnchor from 'markdown-it-anchor';
 import markdownItContainer from 'markdown-it-container';
 import markdownItEmoji from 'markdown-it-emoji';
+import markdownItFootnote from 'markdown-it-footnote';
+import markdownItDeflist from 'markdown-it-deflist';
 
 import twemoji from 'twemoji';
 import Prism from 'prismjs';
@@ -12,7 +14,7 @@ import Prism from 'prismjs';
 import 'markdown-it-latex/dist/index.css';
 
 const renderContainer = (tokens, idx) => {
-  const { info } = tokens[0];
+  const { info } = tokens[idx];
   return tokens[idx].nesting === 1 ? `<div class="alert ${info}">` : `</div>`;
 };
 const md = new MarkdownIt({
@@ -20,14 +22,22 @@ const md = new MarkdownIt({
   highlight(code, language) {
     try {
       setTimeout(() => Prism.highlightAll());
-    } catch (e) {}
-    return `<pre class="language-${language}"><code class="language-${language}">${code}</code></pre>`;
+      return `<pre class="language-${language}"><code class="language-${language}">${Prism.highlight(
+        code,
+        Prism.languages[language],
+        language
+      )}</code></pre>`;
+    } catch (e) {
+      return `<pre class="language-${language}"><code class="language-${language}">${code}</code></pre>`;
+    }
   },
 })
   .use(markdownItMark)
   .use(markdownItTaskList)
   .use(markdownItLateX)
   .use(markdownItEmoji)
+  .use(markdownItFootnote)
+  .use(markdownItDeflist)
   .use(markdownItAnchor, {
     permalink: true,
     renderPermalink: (slug, opts, state, idx) => {

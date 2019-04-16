@@ -72,9 +72,12 @@ const Markdown = forwardRef(
       outputAreaRef.current.innerHTML = markdown.render(value);
       onMarkdownValueChange();
     }, []);
-    useEffect(() => {
-      if (defaultValue) setMarkdownValue(defaultValue);
-    }, [defaultValue]);
+    useEffect(
+      () => {
+        if (defaultValue) setMarkdownValue(defaultValue);
+      },
+      [defaultValue]
+    );
     useImperativeHandle(
       ref,
       () => ({
