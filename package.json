@@ -1,6 +1,6 @@
 {
   "name": "react-markdown-mirror",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React Markdown Editor,based on CodeMirror,Markdown-It and Prism",
   "main": "dist/index.js",
   "scripts": {
