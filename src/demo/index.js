@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import Markdown from '@/component/MarkdownComponent';
 import './global.css';
+import Popover from '../component/Popover';
 
 const defaultMarkdown = `# React Markdown Editor
 
@@ -189,6 +190,7 @@ const App = () => {
         ref={markdown}
         defaultValue={defaultMarkdown}
         onChange={value => console.log('onChange:=>', value)}
+        extra={<div>This is extra operating area</div>}
       />
     </>
   );

@@ -57,6 +57,7 @@ const Markdown = forwardRef(
       debounceTime = 500,
       onChange,
       defaultValue,
+      extra = false,
     },
     ref
   ) => {
@@ -72,12 +73,9 @@ const Markdown = forwardRef(
       outputAreaRef.current.innerHTML = markdown.render(value);
       onMarkdownValueChange();
     }, []);
-    useEffect(
-      () => {
-        if (defaultValue) setMarkdownValue(defaultValue);
-      },
-      [defaultValue]
-    );
+    useEffect(() => {
+      if (defaultValue) setMarkdownValue(defaultValue);
+    }, [defaultValue]);
     useImperativeHandle(
       ref,
       () => ({
@@ -157,7 +155,7 @@ const Markdown = forwardRef(
                 title="Redo"
                 onClick={onClickToolBar('redo')}
               />
-              <Divider type="vertical" />
+              <Divider />
               <Icon
                 className={styles.actionIcon}
                 type="bold"
@@ -188,7 +186,7 @@ const Markdown = forwardRef(
                 title="Mark"
                 onClick={onClickToolBar('highlight')}
               />
-              <Divider type="vertical" />
+              <Divider />
               <i
                 className={styles.actionIcon}
                 title="Heading 1"
@@ -231,7 +229,7 @@ const Markdown = forwardRef(
               >
                 h6
               </i>
-              <Divider type="vertical" />
+              <Divider />
               <Icon
                 className={styles.actionIcon}
                 type="horizontalRule"
@@ -268,7 +266,7 @@ const Markdown = forwardRef(
                 title="Complete task list"
                 onClick={onClickToolBar('completed')}
               />
-              <Divider type="vertical" />
+              <Divider />
               <Icon
                 className={styles.actionIcon}
                 type="code"
@@ -299,7 +297,7 @@ const Markdown = forwardRef(
                 title="Image"
                 onClick={onClickToolBar('image')}
               />
-              <Divider type="vertical" />
+              <Divider />
               <Icon
                 className={styles.actionIcon}
                 type={showView ? 'unWatch' : 'watch'}
@@ -309,6 +307,7 @@ const Markdown = forwardRef(
               <Popover className={styles.themeListWrapper} content={themeListRender(themeList)}>
                 <Icon className={styles.actionIcon} type="theme" title="Theme" />
               </Popover>
+              {extra ? <div className={styles.extra}>{extra}</div> : null}
             </div>
             <div className={styles.toolbarToggle} onClick={() => setToolbarToggle(prev => !prev)} />
           </>

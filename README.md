@@ -63,6 +63,12 @@ ReactDOM.render(<Markdown />,document.getElementById('root'));
         <td>number(ms),default 500ms</td>
         <td>wait for converting</td>
     </tr>
+        <tr>
+            <td>extra</td>
+            <td>ReactNode</td>
+            <td>ReactNode</td>
+            <td>operating area, at the end of the line of the Toolbar line</td>
+        </tr>
     <tr>
     <td>containerClassName</td>
     <td>String</td>

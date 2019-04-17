@@ -8,7 +8,6 @@
   .title {
     height: 60px;
     background: #fff;
-    border-top: 1px solid #d9d9d9;
     border-bottom: 1px solid #d9d9d9;
     padding: 4px 20px;
     display: flex;
@@ -27,7 +26,7 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
       'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
       'Segoe UI Emoji', 'Segoe UI Symbol';
-    border-bottom: 1px solid #d9d9d9;
+    box-shadow: rgba(0, 21, 41, 0.08) 0 1px 4px;
     .actionIcon {
       color: rgba(0, 0, 0, 0.65);
       user-select: none;
@@ -50,6 +49,10 @@
       &:active {
         transform: scale(1.2);
       }
+    }
+    .extra {
+      float: right;
+      margin-left: 12px;
     }
   }
   .toolbarToggle {
