@@ -1,4 +1,40 @@
 .markdown {
+  &.light {
+    --text-normal: #24292e;
+    --text-normal-lighter: #6a737d;
+    --text-octicon-link: #1b1f23;
+    --text-strong: #030303;
+    --text-anchor: #0366d6;
+    --text-anchor-hover: #0366d6;
+    --text-blockquote--border: #dfe2e5;
+    --text-code: #24292e;
+    --text-table-border: #dfe2e5;
+
+    --bg: #fff;
+    --bg-code: rgba(27, 31, 35, 0.05);
+    --bg-kbd: #fafbfc;
+    --bg-hr: #e1e4e8;
+    --bg-tr: #fff;
+    --bg-tr-n2: #f6f8fa;
+  }
+  &.dark {
+    --text-normal: #abb2bf;
+    --text-normal-lighter: #7c879c;
+    --text-anchor: #56b6c2;
+    --text-anchor-hover: #74c3cd;
+    --text-strong: #fff;
+    --text-blockquote--border: #4b5362;
+    --text-code: #fff;
+    --text-table-border: #4b5362;
+
+    --bg: #282c34;
+    --bg-code: #3a3f4b;
+    --bg-hr: #4b5362;
+    :not(pre) > code[class*='language-'],
+    pre[class*='language-'] {
+      background: #011627;
+    }
+  }
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -27,27 +63,31 @@
       'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
       'Segoe UI Emoji', 'Segoe UI Symbol';
     box-shadow: rgba(0, 21, 41, 0.08) 0 1px 4px;
-    .actionIcon {
-      color: rgba(0, 0, 0, 0.65);
-      user-select: none;
-      width: 24px;
-      height: 24px;
-      padding: 0;
-      border: none;
-      font-style: normal;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transform-origin: center;
-      transition: color 300ms, transform 100ms;
-      font-size: 14px;
-      border-radius: 50%;
-      &:hover {
-        color: #40a9ff;
-      }
-      &:active {
-        transform: scale(1.2);
+    .icons {
+      display: inline-block;
+      height: 100%;
+      .actionIcon {
+        color: rgba(0, 0, 0, 0.65);
+        user-select: none;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        border: none;
+        font-style: normal;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transform-origin: center;
+        transition: color 300ms, transform 100ms;
+        font-size: 14px;
+        border-radius: 50%;
+        &:hover {
+          color: #40a9ff;
+        }
+        &:active {
+          transform: scale(1.2);
+        }
       }
     }
     .extra {
@@ -98,13 +138,14 @@
       }
       .outputAreaWrapper {
         position: absolute;
+        transition: background 0.2s ease-out 0s;
         right: 0;
         top: 0;
         width: 50%;
         height: 100%;
         padding: 30px;
         border-radius: 0 4px 4px 0;
-        background: #fff;
+        background: var(--bg);
         border: 1px solid #d9d9d9;
         border-left: none;
         overflow: scroll;

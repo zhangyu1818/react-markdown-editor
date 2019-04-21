@@ -65,6 +65,7 @@ const Markdown = forwardRef(
     const [titleValue, changeTitleValue] = useState(title.defaultValue || '');
     const titleInput = useRef();
     const [showView, setShowView] = useState(true);
+    const [light, setLight] = useState(true);
     const [theme, setTheme] = useState(localStorage.getItem('markdown-theme') || 'default');
     const [toolbarToggle, setToolbarToggle] = useState(false);
     const outputAreaRef = useRef();
@@ -128,7 +129,13 @@ const Markdown = forwardRef(
         </Fragment>
       ));
     return (
-      <div className={classNames(styles.markdown, containerClassName)}>
+      <div
+        className={classNames(
+          styles.markdown,
+          light ? styles.light : styles.dark,
+          containerClassName
+        )}
+      >
         {title ? (
           <div className={styles.title}>
             <input
@@ -143,170 +150,178 @@ const Markdown = forwardRef(
         {toolbar ? (
           <>
             <div className={styles.toolbar} style={{ display: toolbarToggle ? 'none' : null }}>
-              <Icon
-                className={styles.actionIcon}
-                type="undo"
-                title="Undo"
-                onClick={onClickToolBar('undo')}
-              />
-              <Icon
-                className={styles.actionIcon}
-                type="redo"
-                title="Redo"
-                onClick={onClickToolBar('redo')}
-              />
-              <Divider />
-              <Icon
-                className={styles.actionIcon}
-                type="bold"
-                title="Bold"
-                onClick={onClickToolBar('bold')}
-              />
-              <Icon
-                className={styles.actionIcon}
-                type="italic"
-                title="Italic"
-                onClick={onClickToolBar('italic')}
-              />
-              <Icon
-                className={styles.actionIcon}
-                type="strikethrough"
-                title="Strikethrough"
-                onClick={onClickToolBar('strikethrough')}
-              />
-              <Icon
-                className={styles.actionIcon}
-                type="underline"
-                title="Underline"
-                onClick={onClickToolBar('underline')}
-              />
-              <Icon
-                className={styles.actionIcon}
-                type="highlight"
-                title="Mark"
-                onClick={onClickToolBar('highlight')}
-              />
-              <Divider />
-              <i
-                className={styles.actionIcon}
-                title="Heading 1"
-                onClick={onClickToolBar('heading1')}
-              >
-                h1
-              </i>
-              <i
-                className={styles.actionIcon}
-                title="Heading 2"
-                onClick={onClickToolBar('heading2')}
-              >
-                h2
-              </i>
-              <i
-                className={styles.actionIcon}
-                title="Heading 3"
-                onClick={onClickToolBar('heading3')}
-              >
-                h3
-              </i>
-              <i
-                className={styles.actionIcon}
-                title="Heading 4"
-                onClick={onClickToolBar('heading4')}
-              >
-                h4
-              </i>
-              <i
-                className={styles.actionIcon}
-                title="Heading 5"
-                onClick={onClickToolBar('heading5')}
-              >
-                h5
-              </i>
-              <i
-                className={styles.actionIcon}
-                title="Heading 6"
-                onClick={onClickToolBar('heading6')}
-              >
-                h6
-              </i>
-              <Divider />
-              <Icon
-                className={styles.actionIcon}
-                type="horizontalRule"
-                title="Horizontal rule"
-                onClick={onClickToolBar('horizontalRule')}
-              />
-              <Icon
-                className={styles.actionIcon}
-                type="quote"
-                title="Quote"
-                onClick={onClickToolBar('quote')}
-              />
-              <Icon
-                className={styles.actionIcon}
-                type="unorderedList"
-                title="Unordered list"
-                onClick={onClickToolBar('unorderedList')}
-              />
-              <Icon
-                className={styles.actionIcon}
-                type="orderedList"
-                title="Ordered list"
-                onClick={onClickToolBar('orderedList')}
-              />
-              <Icon
-                className={styles.actionIcon}
-                type="incompleteTaskList"
-                title="Incomplete task list"
-                onClick={onClickToolBar('unCompleted')}
-              />
-              <Icon
-                className={styles.actionIcon}
-                type="completeTaskList"
-                title="Complete task list"
-                onClick={onClickToolBar('completed')}
-              />
-              <Divider />
-              <Icon
-                className={styles.actionIcon}
-                type="code"
-                title="Code"
-                onClick={onClickToolBar('code')}
-              />
-              <Icon
-                className={styles.actionIcon}
-                type="table"
-                title="Table"
-                onClick={onClickToolBar('table')}
-              />
-              <Icon
-                className={styles.actionIcon}
-                type="math"
-                title="Mathematical formula"
-                onClick={onClickToolBar('math')}
-              />
-              <Icon
-                className={styles.actionIcon}
-                type="link"
-                title="Link"
-                onClick={onClickToolBar('link')}
-              />
-              <Icon
-                className={styles.actionIcon}
-                type="image"
-                title="Image"
-                onClick={onClickToolBar('image')}
-              />
-              <Divider />
-              <Icon
-                className={styles.actionIcon}
-                type={showView ? 'unWatch' : 'watch'}
-                title={showView ? 'UnWatch' : 'Watch'}
-                onClick={() => setShowView(prevState => !prevState)}
-              />
-              <Popover className={styles.themeListWrapper} content={themeListRender(themeList)}>
-                <Icon className={styles.actionIcon} type="theme" title="Theme" />
-              </Popover>
+              <div className={styles.icons}>
+                <Icon
+                  className={styles.actionIcon}
+                  type="undo"
+                  title="Undo"
+                  onClick={onClickToolBar('undo')}
+                />
+                <Icon
+                  className={styles.actionIcon}
+                  type="redo"
+                  title="Redo"
+                  onClick={onClickToolBar('redo')}
+                />
+                <Divider />
+                <Icon
+                  className={styles.actionIcon}
+                  type="bold"
+                  title="Bold"
+                  onClick={onClickToolBar('bold')}
+                />
+                <Icon
+                  className={styles.actionIcon}
+                  type="italic"
+                  title="Italic"
+                  onClick={onClickToolBar('italic')}
+                />
+                <Icon
+                  className={styles.actionIcon}
+                  type="strikethrough"
+                  title="Strikethrough"
+                  onClick={onClickToolBar('strikethrough')}
+                />
+                <Icon
+                  className={styles.actionIcon}
+                  type="underline"
+                  title="Underline"
+                  onClick={onClickToolBar('underline')}
+                />
+                <Icon
+                  className={styles.actionIcon}
+                  type="highlight"
+                  title="Mark"
+                  onClick={onClickToolBar('highlight')}
+                />
+                <Divider />
+                <i
+                  className={styles.actionIcon}
+                  title="Heading 1"
+                  onClick={onClickToolBar('heading1')}
+                >
+                  h1
+                </i>
+                <i
+                  className={styles.actionIcon}
+                  title="Heading 2"
+                  onClick={onClickToolBar('heading2')}
+                >
+                  h2
+                </i>
+                <i
+                  className={styles.actionIcon}
+                  title="Heading 3"
+                  onClick={onClickToolBar('heading3')}
+                >
+                  h3
+                </i>
+                <i
+                  className={styles.actionIcon}
+                  title="Heading 4"
+                  onClick={onClickToolBar('heading4')}
+                >
+                  h4
+                </i>
+                <i
+                  className={styles.actionIcon}
+                  title="Heading 5"
+                  onClick={onClickToolBar('heading5')}
+                >
+                  h5
+                </i>
+                <i
+                  className={styles.actionIcon}
+                  title="Heading 6"
+                  onClick={onClickToolBar('heading6')}
+                >
+                  h6
+                </i>
+                <Divider />
+                <Icon
+                  className={styles.actionIcon}
+                  type="horizontalRule"
+                  title="Horizontal rule"
+                  onClick={onClickToolBar('horizontalRule')}
+                />
+                <Icon
+                  className={styles.actionIcon}
+                  type="quote"
+                  title="Quote"
+                  onClick={onClickToolBar('quote')}
+                />
+                <Icon
+                  className={styles.actionIcon}
+                  type="unorderedList"
+                  title="Unordered list"
+                  onClick={onClickToolBar('unorderedList')}
+                />
+                <Icon
+                  className={styles.actionIcon}
+                  type="orderedList"
+                  title="Ordered list"
+                  onClick={onClickToolBar('orderedList')}
+                />
+                <Icon
+                  className={styles.actionIcon}
+                  type="incompleteTaskList"
+                  title="Incomplete task list"
+                  onClick={onClickToolBar('unCompleted')}
+                />
+                <Icon
+                  className={styles.actionIcon}
+                  type="completeTaskList"
+                  title="Complete task list"
+                  onClick={onClickToolBar('completed')}
+                />
+                <Divider />
+                <Icon
+                  className={styles.actionIcon}
+                  type="code"
+                  title="Code"
+                  onClick={onClickToolBar('code')}
+                />
+                <Icon
+                  className={styles.actionIcon}
+                  type="table"
+                  title="Table"
+                  onClick={onClickToolBar('table')}
+                />
+                <Icon
+                  className={styles.actionIcon}
+                  type="math"
+                  title="Mathematical formula"
+                  onClick={onClickToolBar('math')}
+                />
+                <Icon
+                  className={styles.actionIcon}
+                  type="link"
+                  title="Link"
+                  onClick={onClickToolBar('link')}
+                />
+                <Icon
+                  className={styles.actionIcon}
+                  type="image"
+                  title="Image"
+                  onClick={onClickToolBar('image')}
+                />
+                <Divider />
+                <Icon
+                  className={styles.actionIcon}
+                  type={showView ? 'unWatch' : 'watch'}
+                  title={showView ? 'UnWatch' : 'Watch'}
+                  onClick={() => setShowView(prevState => !prevState)}
+                />
+                <Popover className={styles.themeListWrapper} content={themeListRender(themeList)}>
+                  <Icon className={styles.actionIcon} type="theme" title="Theme" />
+                </Popover>
+                <Icon
+                  className={styles.actionIcon}
+                  type={light ? 'light' : 'dark'}
+                  title={light ? 'Light' : 'Dark'}
+                  onClick={() => setLight(prevState => !prevState)}
+                />
+              </div>
               {extra ? <div className={styles.extra}>{extra}</div> : null}
             </div>
             <div className={styles.toolbarToggle} onClick={() => setToolbarToggle(prev => !prev)} />

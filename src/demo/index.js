@@ -10,7 +10,7 @@ A convenient React.js markdown editor component,Type Markdown on the left and yo
 
 ## Keyboard Shortcuts
 
-A full list of keyboard shortcuts
+List of keyboard shortcuts
 
 supported：
 
