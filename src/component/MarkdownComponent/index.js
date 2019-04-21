@@ -317,8 +317,8 @@ const Markdown = forwardRef(
                 </Popover>
                 <Icon
                   className={styles.actionIcon}
-                  type={light ? 'light' : 'dark'}
-                  title={light ? 'Light' : 'Dark'}
+                  type={!light ? 'light' : 'dark'}
+                  title={!light ? 'Light' : 'Dark'}
                   onClick={() => setLight(prevState => !prevState)}
                 />
               </div>

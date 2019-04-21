@@ -71,12 +71,12 @@
   h1 {
     font-size: 2.25em;
     padding-bottom: 0.3em;
-    border-bottom: 1px solid #eaecef;
+    border-bottom: 1px solid var(--text-heading-border);
   }
   h2 {
     font-size: 1.75em;
     padding-bottom: 0.3em;
-    border-bottom: 1px solid #eaecef;
+    border-bottom: 1px solid var(--text-heading-border);
   }
   h3 {
     font-size: 1.5em;
