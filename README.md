@@ -1,19 +1,21 @@
 # react-markdown-editor
-A convenient React.js *markdown editor* component,Type Markdown on the left and you can preview in real-time on the right panel.
+
+A convenient React.js _markdown editor_ component,Type Markdown on the left and you can preview in real-time on the right panel.
 
 [Demo](http://sbzy.me/markdown)
 
 ## Install
+
 `npm install --save react-markdown-mirror`
 
 ## Usage
 
-``` javascript
+```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Markdown from 'react-markdown-mirror';
 
-ReactDOM.render(<Markdown />,document.getElementById('root'));
+ReactDOM.render(<Markdown />, document.getElementById('root'));
 ```
 
 ### Props
@@ -36,8 +38,8 @@ ReactDOM.render(<Markdown />,document.getElementById('root'));
     </tr>
      <tr>
       <td>Object</td>
-      <td>{defaultValue:String,maxLength:Number}</td>
-      <td>set title default value and max length</td>
+      <td>{visible:Boolean,defaultValue:String,maxLength:Number}</td>
+      <td>set title visible, default value and max length</td>
     </tr>
      <tr>
       <td>toolbar</td>
@@ -93,11 +95,14 @@ ReactDOM.render(<Markdown />,document.getElementById('root'));
 ### Get value
 
 1.use onChange prop,you can do something on this callback
-``` javascript
-<Markdown onChange={value=>console.log(value)} />
+
+```javascript
+<Markdown onChange={value => console.log(value)} />
 ```
+
 2.use ref
-``` javascript
+
+```javascript
 const App = () => {
   const markdown = useRef();
   useEffect(() => {
@@ -111,13 +116,15 @@ const App = () => {
 ### Set value
 
 also use ref
-``` javascript
+
+```javascript
 const App = () => {
   const markdown = useRef();
   useEffect(() => {
-    const defaultValue = "# This is default value";
-    markdown.current.setValue(defaultValue)l
-  },[]);
+    const defaultTitle = 'default title';
+    const defaultMarkdown = '# This is default markdown';
+    markdown.current.setValue({ title: defaultTitle, markdown: defaultMarkdown });
+  }, []);
   return <Markdown ref={markdown} />;
 };
 ```

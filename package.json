@@ -1,7 +1,12 @@
 {
   "name": "react-markdown-mirror",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "React Markdown Editor,based on CodeMirror,Markdown-It and Prism",
+  "keywords": [
+    "react",
+    "react markdown",
+    "react markdown editor"
+  ],
   "main": "dist/index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.dev.js",

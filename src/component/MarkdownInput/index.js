@@ -119,6 +119,10 @@ const MarkdownInput = forwardRef(
         const percent = positionInfo.top / height;
         if (onScroll) onScroll(percent);
       });
+      return () => {
+        editor.current.off('change');
+        editor.current.off('scroll');
+      };
     }, []);
     useImperativeHandle(
       ref,
@@ -176,27 +180,18 @@ row 2 col 1 | row 2 col 2`,
       }),
       []
     );
-    useEffect(
-      () => {
-        if (mouseIn.current) return;
-        const positionInfo = editor.current.getScrollInfo();
-        const height = positionInfo.height - positionInfo.clientHeight;
-        editor.current.scrollTo(0, height * scrollPercent);
-      },
-      [scrollPercent]
-    );
-    useEffect(
-      () => {
-        editor.current.setOption('theme', theme);
-      },
-      [theme]
-    );
-    useEffect(
-      () => {
-        if (defaultValue) editor.current.setValue(defaultValue);
-      },
-      [defaultValue]
-    );
+    useEffect(() => {
+      if (mouseIn.current) return;
+      const positionInfo = editor.current.getScrollInfo();
+      const height = positionInfo.height - positionInfo.clientHeight;
+      editor.current.scrollTo(0, height * scrollPercent);
+    }, [scrollPercent]);
+    useEffect(() => {
+      editor.current.setOption('theme', theme);
+    }, [theme]);
+    useEffect(() => {
+      if (defaultValue) editor.current.setValue(defaultValue);
+    }, [defaultValue]);
     return (
       <div className={className} style={style}>
         <div

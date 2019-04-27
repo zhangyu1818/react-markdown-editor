@@ -1,8 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Markdown from '@/component/MarkdownComponent';
 import './global.css';
-import Popover from '../component/Popover';
 
 const defaultMarkdown = `# React Markdown Editor
 
@@ -172,7 +171,23 @@ sum_(i=1)^n i^3=((n(n+1))/2)^2
 const App = () => {
   const [showTitle, setShowTitle] = useState(true);
   const [showToolbar, setShowToolbar] = useState(true);
+  const [titleValue, setTitleValue] = useState('');
+  const [markdownValue, setMarkdownValue] = useState('');
+  const isMount = useRef(false);
   const markdown = useRef();
+  useEffect(() => {
+    if (isMount.current) {
+      markdown.current.setValue({ title: titleValue });
+    }
+  }, [titleValue]);
+  useEffect(() => {
+    if (isMount.current) {
+      markdown.current.setValue({ markdown: markdownValue });
+    }
+  }, [markdownValue]);
+  useEffect(() => {
+    isMount.current = true;
+  }, []);
   return (
     <>
       <div style={{ height: 24 }}>
@@ -183,6 +198,18 @@ const App = () => {
         <button onClick={() => console.log('getValue:=>', markdown.current.getValue())}>
           get value(console)
         </button>
+        <input
+          placeholder="title"
+          type="text"
+          value={titleValue}
+          onChange={({ target }) => setTitleValue(target.value)}
+        />
+        <input
+          placeholder="markdown"
+          type="text"
+          value={markdownValue}
+          onChange={({ target }) => setMarkdownValue(target.value)}
+        />
       </div>
       <Markdown
         title={showTitle}

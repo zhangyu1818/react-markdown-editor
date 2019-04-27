@@ -52,12 +52,9 @@ const Popover = ({ content, className, children }) => {
       window.removeEventListener('click', onClickOther);
     };
   }, []);
-  useEffect(
-    () => {
-      showStatus.current = show;
-    },
-    [show]
-  );
+  useEffect(() => {
+    showStatus.current = show;
+  }, [show]);
   const onClickDom = () => {
     setVisible(prev => !prev);
   };

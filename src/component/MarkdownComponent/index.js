@@ -52,7 +52,7 @@ const Markdown = forwardRef(
       containerClassName,
       inputClassName,
       outputClassName,
-      title = true,
+      title = { visible: true },
       toolbar = true,
       debounceTime = 500,
       onChange,
@@ -70,13 +70,23 @@ const Markdown = forwardRef(
     const [toolbarToggle, setToolbarToggle] = useState(false);
     const outputAreaRef = useRef();
     const inputAreaRef = useRef();
+    const titleValueRef = useRef();
+    // markdown input change
     const onInputChange = useCallback(value => {
+      if (!outputAreaRef.current) return;
       outputAreaRef.current.innerHTML = markdown.render(value);
       onMarkdownValueChange();
     }, []);
+    // default value change
     useEffect(() => {
       if (defaultValue) setMarkdownValue(defaultValue);
     }, [defaultValue]);
+    // title value change
+    useEffect(() => {
+      titleValueRef.current = titleValue;
+      onMarkdownValueChange();
+    }, [titleValue]);
+    // markdown editor ref
     useImperativeHandle(
       ref,
       () => ({
@@ -85,28 +95,41 @@ const Markdown = forwardRef(
       }),
       []
     );
+    // on title change,set title state value
     const onTitleChange = e => {
       const value = e.target.value;
-      if (title.maxLength && value.length > title.maxLength) return;
+      if (
+        title.maxLength &&
+        value.length > title.maxLength &&
+        value.length > titleValueRef.current.length
+      )
+        return;
       changeTitleValue(value);
-      onMarkdownValueChange();
     };
-    const setMarkdownValue = value => inputAreaRef.current.setValue(value);
+    // set title and markdown value
+    const setMarkdownValue = ({ title, markdown }) => {
+      if (title !== undefined) changeTitleValue(title);
+      if (markdown !== undefined) inputAreaRef.current.setValue(markdown);
+    };
+    // get value
     const getMarkdownValue = () => {
       const markdown = inputAreaRef.current.getValue();
       const html = outputAreaRef.current.innerHTML;
-      const title = titleInput.current ? titleInput.current.value : '';
+      const title = titleValueRef.current;
       return { title, markdown, html };
     };
+    // on markdown value change,trigger onChange prop
     const onMarkdownValueChange = () => {
       const value = getMarkdownValue();
       if (onChange) {
         onChange(value);
       }
     };
+    // click toolbar icon
     const onClickToolBar = action => () => {
       inputAreaRef.current.action(action);
     };
+    // theme list render
     const themeListRender = dataSource =>
       dataSource.map(item => (
         <Fragment key={item.type}>
@@ -136,7 +159,7 @@ const Markdown = forwardRef(
           containerClassName
         )}
       >
-        {title ? (
+        {title === true || title.visible ? (
           <div className={styles.title}>
             <input
               className={styles.titleName}
