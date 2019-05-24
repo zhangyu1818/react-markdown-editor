@@ -217,7 +217,7 @@ const App = () => {
         ref={markdown}
         defaultValue={defaultMarkdown}
         onChange={value => console.log('onChange:=>', value)}
-        extra={<div>This is extra operating area</div>}
+        extra={<div>You can add React node like upload button here</div>}
       />
     </>
   );

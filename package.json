@@ -1,6 +1,6 @@
 {
   "name": "react-markdown-mirror",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "React Markdown Editor,based on CodeMirror,Markdown-It and Prism",
   "keywords": [
     "react",
@@ -24,33 +24,34 @@
   "author": "zhangyu1818",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "@babel/preset-env": "^7.4.3",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.5.1",
-    "babel-loader": "^8.0.5",
-    "clean-webpack-plugin": "^2.0.1",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^2.0.2",
     "css-loader": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.12.0",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
-    "webpack": "^4.29.6",
+    "webpack": "^4.32.2",
     "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.3.1"
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.4.1",
+    "webpack-merge": "^4.2.1"
   },
   "dependencies": {
     "babel-plugin-prismjs": "^1.0.2",
     "classnames": "^2.2.6",
-    "codemirror": "^5.45.0",
+    "codemirror": "^5.47.0",
     "install": "^0.12.2",
     "lodash": "^4.17.11",
     "markdown-it": "^8.4.2",
-    "markdown-it-anchor": "^5.0.2",
+    "markdown-it-anchor": "^5.1.0",
     "markdown-it-container": "^2.0.0",
     "markdown-it-deflist": "^2.0.3",
     "markdown-it-emoji": "^1.4.0",
@@ -63,6 +64,6 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-transition-group": "^2.9.0",
-    "twemoji": "^12.0.0"
+    "twemoji": "^12.0.1"
   }
 }

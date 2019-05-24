@@ -46,7 +46,7 @@
   .title {
     height: 60px;
     background: #fff;
-    border-bottom: 1px solid #d9d9d9;
+    border-bottom: 1px solid #ebedf0;
     padding: 4px 20px;
     display: flex;
     .titleName {
@@ -87,7 +87,7 @@
           color: #40a9ff;
         }
         &:active {
-          transform: scale(1.2);
+          color: #096dd9;
         }
       }
     }
@@ -133,7 +133,7 @@
         left: 0;
         width: 50%;
         height: 100%;
-        border: 1px solid #d9d9d9;
+        border: 1px solid #ebedf0;
         border-radius: 4px 0 0 4px;
         overflow: hidden;
       }
@@ -147,7 +147,7 @@
         padding: 30px;
         border-radius: 0 4px 4px 0;
         background: var(--bg);
-        border: 1px solid #d9d9d9;
+        border: 1px solid #ebedf0;
         border-left: none;
         overflow: scroll;
       }

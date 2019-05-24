@@ -15,7 +15,7 @@ import Divider from '../Divider';
 import MarkdownInput from '../MarkdownInput';
 import MarkdownOutput from '../MarkdownOutput';
 import Popover from '../Popover';
-import markdown from '../MarkdownIt';
+import markdown from '../../markdown-it';
 
 import styles from './styles.scss';
 import '@/global.scss';
