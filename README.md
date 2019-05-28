@@ -2,7 +2,7 @@
 
 A convenient React.js _markdown editor_ component,Type Markdown on the left and you can preview in real-time on the right panel.
 
-[Demo](http://sbzy.me/markdown)
+[Demo](http://zhangyu1818.com/markdown)
 
 ## Install
 
